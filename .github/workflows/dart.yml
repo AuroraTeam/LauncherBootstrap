@@ -20,16 +20,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Dart
-        uses: dart-lang/setup-dart@v1.4
+        uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies
         run: dart pub get
 
       - name: Build
-        run: dart compile exe ./bin/serverwrapper.dart -o ${{ matrix.fileName }}
+        run: dart compile exe ./bin/launcher_bootstrap.dart -o ${{ matrix.fileName }}
 
       - name: Create release
         uses: softprops/action-gh-release@v1
