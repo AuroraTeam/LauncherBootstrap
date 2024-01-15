@@ -22,22 +22,12 @@ class JavaDownloader {
   }
 
   static _downloadJava(Directory javaDirectory) async {
-    final javaDataLink = Uri.https(
-      'api.adoptium.net',
-      'v3/assets/latest/8/hotspot',
-      {'architecture': _getArch(), 'image_type': 'jre', 'os': _getOs()},
+    final downloadLink = Uri.https(
+      'corretto.aws',
+      'downloads/latest/amazon-corretto-8-${_getArch()}-${_getOs()}-jre.${_getExt()}',
     );
 
-    final javaData = await get(javaDataLink);
-    if (javaData.statusCode != 200) {
-      print('Failed to download Java. Status code: ${javaData.statusCode}');
-      return;
-    }
-
-    final data = jsonDecode(javaData.body);
-    final downloadLink = data[0]['binary']['package']['link'];
-
-    final javaZip = await get(Uri.parse(downloadLink));
+    final javaZip = await get(downloadLink);
     if (javaZip.statusCode != 200) {
       print('Failed to download Java. Status code: ${javaZip.statusCode}');
       return;
@@ -90,5 +80,12 @@ class JavaDownloader {
       case Abi.windowsArm64:
         return 'aarch64';
     }
+  }
+
+  static _getExt() {
+    if (Platform.isWindows) {
+      return 'zip';
+    }
+    return "tar.gz";
   }
 }
