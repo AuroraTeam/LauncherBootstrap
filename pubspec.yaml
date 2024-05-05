@@ -4,13 +4,13 @@ version: 1.0.1
 repository: https://github.com/AuroraTeam/LauncherBootstrap
 
 environment:
-  sdk: ^3.2.4
+  sdk: ^3.3.4
 
 # Add regular dependencies here.
 dependencies:
-  archive: ^3.4.9
-  http: ^1.1.0
+  archive: ^3.5.1
+  http: ^1.2.1
 
 dev_dependencies:
-  json_serializable: ^6.7.1
+  json_serializable: ^6.8.0
   lints: ^3.0.0

@@ -22,12 +22,15 @@ class JavaDownloader {
   }
 
   static _downloadJava(Directory javaDirectory) async {
-    final downloadLink = Uri.https(
-      'corretto.aws',
-      'downloads/latest/amazon-corretto-8-${_getArch()}-${_getOs()}-jre.${_getExt()}',
+    final javaLink = Uri.https(
+      'api.azul.com',
+      'metadata/v1/zulu/packages/',
+      {'java_version': '17', 'os': _getOs(), 'arch': _getArch(), 'archive_type': _getExt(), 'java_package_type': 'jre', 'javafx_bundled': 'true', 'latest': 'true', 'release_status': 'ga', 'availability_types': 'CA', 'certifications': 'tck', 'page': '1', 'page_size': '1'}
     );
+    final javaData = await get(javaLink);
+    final body = json.decode(javaData.body);
 
-    final javaZip = await get(downloadLink);
+    final javaZip = await get(Uri.parse(body[0]['download_url']));
     if (javaZip.statusCode != 200) {
       print('Failed to download Java. Status code: ${javaZip.statusCode}');
       return;
@@ -55,20 +58,17 @@ class JavaDownloader {
   }
 
   static _getOs() {
-    if (Platform.isMacOS) {
-      return 'mac';
-    }
     return Platform.operatingSystem;
   }
 
   static _getArch() {
     switch (Abi.current()) {
       case Abi.linuxArm:
-        return 'arm';
+        return 'aarch32';
 
       case Abi.linuxIA32:
       case Abi.windowsIA32:
-        return 'x86';
+        return 'i686';
 
       case Abi.linuxX64:
       case Abi.macosX64:
