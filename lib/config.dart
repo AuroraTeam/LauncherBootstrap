@@ -1,6 +1,6 @@
 class Config {
   static final Uri launcherJarUrl =
-      Uri.parse('https://your-project-site.ru/path/to/launcher.jar');
+      Uri.parse('http://owa.mine-souls.ru:9274/MineSoulsLauncher.jar');
 
-  static final String projectDirectoryName = 'your-project-dir-name';
+  static final String projectDirectoryName = 'MineSoulsRp-Dart';
 }
