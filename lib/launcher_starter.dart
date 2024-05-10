@@ -4,10 +4,10 @@ import 'package:launcher_bootstrap/storage_manager.dart';
 
 class LauncherStarter {
   static startLauncher() async {
-    print('Starting launcher...');
+    print('Запуск Лаунчера...');
 
     await Process.start(
-        await _resolveJavaExecutablePath(), ['-jar', 'launcher.jar'],
+        await _resolveJavaExecutablePath(), ['-jar', 'Core.jar'],
         mode: ProcessStartMode.detached,
         workingDirectory: StorageManager.wrapperDirectory);
   }
