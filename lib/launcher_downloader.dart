@@ -6,17 +6,17 @@ import 'package:launcher_bootstrap/storage_manager.dart';
 
 class LauncherDownloader {
   static checkLauncher() async {
-    print('Checking launcher...');
+    print('Проверка лаунчера...');
 
     final launcherFile =
-        File('${StorageManager.wrapperDirectory}/launcher.jar');
+        File('${StorageManager.wrapperDirectory}/core.jar');
 
     if (await launcherFile.exists()) {
-      print('Launcher is already installed.');
+      print('Лаунчер уже установлен.');
       return;
     }
 
-    print('Launcher is not installed. Downloading...');
+    print('Лаунчер не установлен. Выполняю загрузку...');
     await _downloadLauncher(launcherFile);
   }
 
@@ -24,12 +24,12 @@ class LauncherDownloader {
     final launcherJar = await get(Config.launcherJarUrl);
     if (launcherJar.statusCode != 200) {
       print(
-          'Failed to download launcher. Status code: ${launcherJar.statusCode}');
+          'Не удалось загрузить лаунчер. Код состояния: ${launcherJar.statusCode}');
       return;
     }
 
     await launcherFile.writeAsBytes(launcherJar.bodyBytes);
 
-    print('Launcher downloaded successfully.');
+    print('Лаунчер успешно загружен.');
   }
 }
