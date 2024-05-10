@@ -12,11 +12,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            fileName: "starter_linux"
+            fileName: "PrestarterMSRP_linux"
           - os: windows-latest
-            fileName: "starter_windows.exe"
+            fileName: "PrestarterMSRP_windows.exe"
           - os: macos-latest
-            fileName: "starter_macos"
+            fileName: "PrestarterMSRP_macos"
 
     steps:
       - name: Checkout
