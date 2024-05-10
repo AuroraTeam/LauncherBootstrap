@@ -7,7 +7,7 @@ class LauncherStarter {
     print('Запуск Лаунчера...');
 
     await Process.start(
-        await _resolveJavaExecutablePath(), ['-jar', 'Core.jar'],
+        await _resolveJavaExecutablePath(), ['-jar', 'core.jar'],
         mode: ProcessStartMode.detached,
         workingDirectory: StorageManager.wrapperDirectory);
   }
