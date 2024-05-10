@@ -8,16 +8,16 @@ import 'package:launcher_bootstrap/storage_manager.dart';
 
 class JavaDownloader {
   static checkJava() async {
-    print('Checking Java...');
+    print('Проверка Java...');
 
     final javaDirectory = Directory('${StorageManager.wrapperDirectory}/java');
 
     if (await javaDirectory.exists()) {
-      print('Java is already installed.');
+      print('Java уже установлена.');
       return;
     }
 
-    print('Java is not installed. Downloading...');
+    print('Java не установлена. Выполняю загрузку...');
     await _downloadJava(javaDirectory);
   }
 
@@ -25,18 +25,18 @@ class JavaDownloader {
     final javaLink = Uri.https(
       'api.azul.com',
       'metadata/v1/zulu/packages/',
-      {'java_version': '17', 'os': _getOs(), 'arch': _getArch(), 'archive_type': _getExt(), 'java_package_type': 'jre', 'javafx_bundled': 'true', 'latest': 'true', 'release_status': 'ga', 'availability_types': 'CA', 'certifications': 'tck', 'page': '1', 'page_size': '1'}
+      {'java_version': '22', 'os': _getOs(), 'arch': _getArch(), 'archive_type': _getExt(), 'java_package_type': 'jre', 'javafx_bundled': 'true', 'latest': 'true', 'release_status': 'ga', 'availability_types': 'CA', 'certifications': 'tck', 'page': '1', 'page_size': '1'}
     );
     final javaData = await get(javaLink);
     final body = json.decode(javaData.body);
 
     final javaZip = await get(Uri.parse(body[0]['download_url']));
     if (javaZip.statusCode != 200) {
-      print('Failed to download Java. Status code: ${javaZip.statusCode}');
+      print('Не удалось загрузить Java. Код состояния: ${javaZip.statusCode}');
       return;
     }
 
-    print('Extracting Java...');
+    print('Извлечение Java...');
     await javaDirectory.create(recursive: true);
 
     Archive javaBinary;
