@@ -14,3 +14,7 @@ dependencies:
 dev_dependencies:
   json_serializable: ^6.8.0
   lints: ^3.0.0
+  
+flutter:
+  assets:
+    - assets/ваша_иконка.png
