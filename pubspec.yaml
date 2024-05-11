@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   json_serializable: ^6.8.0
   lints: ^3.0.0
-  flutter_test:
+  flutter:
     sdk: flutter
   flutter_launcher_icons: "^0.9.0"
 
