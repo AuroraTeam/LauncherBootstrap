@@ -27,7 +27,14 @@ jobs:
 
       - name: Install dependencies
         run: dart pub get
-
+        
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.8.1'
+      - name: Update icons
+        run: flutter pub pub run flutter_launcher_icons:main
+        
       - name: Build
         run: dart compile exe ./bin/launcher_bootstrap.dart -o ${{ matrix.fileName }}
 
