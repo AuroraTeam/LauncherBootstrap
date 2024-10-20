@@ -1,6 +1,6 @@
 class Config {
   static final Uri launcherJarUrl =
-      Uri.parse('https://your-project-site.ru/path/to/launcher.jar');
+      Uri.parse('http://92.246.143.247:9274/CubixCraft.jar');
 
-  static final String projectDirectoryName = 'your-project-dir-name';
+  static final String projectDirectoryName = 'CubixCraft';
 }
